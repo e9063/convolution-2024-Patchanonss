@@ -19,7 +19,7 @@ int main() {
     double start_time = omp_get_wtime();
     convolve_sequential(A, F, NA, NF, R);
     double end_time = omp_get_wtime();
-    printf("Sequential time: %f seconds\n", end_time - start_time);
+    // printf("Sequential time: %f seconds\n", end_time - start_time);
 
     // Free allocated memory
     free(A);
@@ -63,7 +63,8 @@ void convolve_sequential(int *A, int *F, int NA, int NF, int *R) {
             sum += (long long int)A[i + j] * FF[j];
         }
         R[i] = (int)sum;  // Store as int if output array R should be int
-        printf("Output is %lld\n", sum);
+        // printf("Output is %lld\n", sum);
+        printf("%lld\n", sum);
     }
 
     free(FF);
