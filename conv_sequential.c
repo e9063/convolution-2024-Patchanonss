@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <omp.h>
+// #include <omp.h>
 
 // Function prototypes
 void read_input(int *NA, int *NF, int **A, int **F);
@@ -16,9 +16,9 @@ int main() {
     R = (int*)malloc(sizeof(int) * (NA - NF + 1));
 
     // Sequential convolution
-    double start_time = omp_get_wtime();
+    // double start_time = omp_get_wtime();
     convolve_sequential(A, F, NA, NF, R);
-    double end_time = omp_get_wtime();
+    // double end_time = omp_get_wtime();
     // printf("Sequential time: %f seconds\n", end_time - start_time);
 
     // Free allocated memory
