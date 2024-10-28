@@ -23,6 +23,10 @@ int main() {
     double end_time = omp_get_wtime();
     // printf("Parallel time: %f seconds\n", end_time - start_time);
 
+
+    for (int i = 0; i <= NA - NF; i++) {
+        printf("%d\n", R[i]);  // Print the result
+    }
     // Free allocated memory
     free(A);
     free(F);
@@ -44,12 +48,13 @@ void convolve_parallel(int *A, int *F, int NA, int NF, int *R) {
     #pragma omp parallel for
     for (int i = 0; i <= NA - NF; i++) {
         long long int sum = 0;
+        // #pragma omp parallel for
         for (int j = 0; j < NF; j++) {
             sum += (long long int)A[i + j] * FF[j];
         }
         R[i] = (int)sum;  // Store as int if output array R should be int
         // printf("Output is %lld\n", sum);
-        printf("%lld\n", sum);
+        // printf("%lld\n", sum);
     }
 
     free(FF);
