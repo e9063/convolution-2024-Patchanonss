@@ -24,8 +24,8 @@ if len(sys.argv) > 2:
     except TypeError:
         raise TypeError('arg 2 will be used as array size. Make it positive int.')
 else:
-    NA = 1000000
-    NF = 10000
+    NA = 10000000
+    NF = 9999980
 
 if len(sys.argv) > 3:
     try:
@@ -43,12 +43,12 @@ print(A)
 print(F)
 B = np.convolve(A, F, mode='valid')
 
-if len(sys.argv) > 1:
-    with open(f'input_{name}.txt', 'w') as input_file:
-        print(f'{NA} {NF}', file = input_file)
-        print(*A, sep='\n', file = input_file)
-        print(*F, sep='\n', file = input_file)
 
-    with open(f'output_{name}.txt', 'w') as output_file:
-        print(*B, sep='\n', file = output_file)
+with open(f'input_temp.txt', 'w') as input_file:
+    print(f'{NA} {NF}', file = input_file)
+    print(*A, sep='\n', file = input_file)
+    print(*F, sep='\n', file = input_file)
+
+# with open(f'output_temp.txt', 'w') as output_file:
+#     print(*B, sep='\n', file = output_file)
 

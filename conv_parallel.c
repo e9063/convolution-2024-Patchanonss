@@ -4,17 +4,17 @@
 
 // Function prototypes
 void read_input(int *NA, int *NF, int **A, int **F);
-void convolve_sequential(int *A, int *F, int NA, int NF, int *R);
-void convolve_parallel(int *A, int *F, int NA, int NF, int *R);
+void convolve_parallel(int *A, int *F, int NA, int NF, long long int *R);
 
 int main() {
     // Read input
     int NA, NF;
-    int *A, *F, *R;
+    int *A, *F;
+    long long int *R;
     read_input(&NA, &NF, &A, &F);
 
     // Allocate memory for result
-    R = (int*)malloc(sizeof(int) * (NA - NF + 1));
+    R = (long long int*)malloc(sizeof(long long int) * (NA - NF + 1));
 
     // Parallel convolution
     omp_set_num_threads(4);
@@ -25,7 +25,7 @@ int main() {
 
 
     for (int i = 0; i <= NA - NF; i++) {
-        printf("%d\n", R[i]);  // Print the result
+        printf("%lld\n", R[i]);  // Print the result
     }
     // Free allocated memory
     free(A);
@@ -36,7 +36,7 @@ int main() {
 }
 
 
-void convolve_parallel(int *A, int *F, int NA, int NF, int *R) {
+void convolve_parallel(int *A, int *F, int NA, int NF, long long int *R) {
     long long int *FF = (long long int*) malloc(NF * sizeof(long long int));
 
     // Reverse the filter F into FF
@@ -52,7 +52,7 @@ void convolve_parallel(int *A, int *F, int NA, int NF, int *R) {
         for (int j = 0; j < NF; j++) {
             sum += (long long int)A[i + j] * FF[j];
         }
-        R[i] = (int)sum;  // Store as int if output array R should be int
+        R[i] = sum;  // Store as int if output array R should be int
         // printf("Output is %lld\n", sum);
         // printf("%lld\n", sum);
     }
